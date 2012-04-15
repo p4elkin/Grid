@@ -4,8 +4,8 @@ import java.util.Set;
 
 import org.vaadin.addon.grid.client.rpc.ClientSideHandler;
 import org.vaadin.addon.grid.client.ui.VColumnModel;
+import org.vaadin.addon.grid.client.ui.css.ComputedStyle;
 import org.vaadin.addon.grid.client.ui.widget.VGridBodyScrollPanel;
-import org.vaadin.csstools.client.ComputedStyle;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;

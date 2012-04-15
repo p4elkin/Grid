@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.vaadin.addon.grid.client.ui.VColumnModel;
-import org.vaadin.csstools.client.ComputedStyle;
+import org.vaadin.addon.grid.client.ui.css.ComputedStyle;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.vaadin.addon</groupId>
 		<artifactId>grid-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.4-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.vaadin.addon</groupId>
@@ -127,6 +127,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			
 			<plugin>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
@@ -149,12 +150,6 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin</artifactId>
 			<version>${vaadin.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.vaadin.addons</groupId>
-			<artifactId>css-tools</artifactId>
-			<version>0.3</version>
 		</dependency>
 		
 		<dependency>

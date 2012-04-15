@@ -9,9 +9,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.vaadin.addon.grid.client.common.GridConst;
+import org.vaadin.addon.grid.client.ui.css.CSSRule;
+import org.vaadin.addon.grid.client.ui.css.ComputedStyle;
 import org.vaadin.addon.grid.client.ui.header.VGridHeader;
-import org.vaadin.csstools.client.CSSRule;
-import org.vaadin.csstools.client.ComputedStyle;
 
 public class VColumnModel {
 

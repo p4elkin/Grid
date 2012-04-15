@@ -2,8 +2,8 @@ package org.vaadin.addon.grid.client.ui.body;
 
 import org.vaadin.addon.grid.client.event.PageNavigationEvent;
 import org.vaadin.addon.grid.client.ui.VGrid;
+import org.vaadin.addon.grid.client.ui.css.ComputedStyle;
 import org.vaadin.addon.grid.client.ui.widget.VGridBodyScrollPanel;
-import org.vaadin.csstools.client.ComputedStyle;
 
 @SuppressWarnings("serial")
 public class VPagingBodyComposite extends VGridBodyComposite<VPagingBody> {

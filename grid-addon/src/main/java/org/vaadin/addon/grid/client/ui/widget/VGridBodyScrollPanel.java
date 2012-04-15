@@ -1,6 +1,6 @@
 package org.vaadin.addon.grid.client.ui.widget;
 
-import org.vaadin.csstools.client.ComputedStyle;
+import org.vaadin.addon.grid.client.ui.css.ComputedStyle;
 
 public class VGridBodyScrollPanel extends ScrollPanelGWT {
 
