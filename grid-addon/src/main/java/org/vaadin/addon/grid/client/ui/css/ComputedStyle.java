@@ -48,8 +48,8 @@ public class ComputedStyle {
      */
     public final native String getProperty(String name)
     /*-{
-        var cs = this.@org.vaadin.csstools.client.ComputedStyle::computedStyle;
-        var elem = this.@org.vaadin.csstools.client.ComputedStyle::elem;
+        var cs = this.@org.vaadin.addon.grid.client.ui.css.ComputedStyle::computedStyle;
+        var elem = this.@org.vaadin.addon.grid.client.ui.css.ComputedStyle::elem;
         
         // Border values need to be checked separately. The width might have a 
         // meaningful value even if the border style is "none". In that case the 

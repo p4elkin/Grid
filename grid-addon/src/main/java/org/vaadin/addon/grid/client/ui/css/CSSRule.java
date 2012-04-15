@@ -102,7 +102,7 @@ public class CSSRule {
      */
     public native String getProperty(final String propertyName)
     /*-{
-        var j = this.@org.vaadin.csstools.client.CSSRule::rules.length;
+        var j = this.@org.vaadin.addon.grid.client.ui.css.CSSRule::rules.length;
         for(var i=0; i<j; i++){
             var value = this.@org.vaadin.addon.grid.client.ui.css.CSSRule::rules[i].style[propertyName];
         if(value)

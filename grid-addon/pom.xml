@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.vaadin.addon</groupId>
 		<artifactId>grid-parent</artifactId>
-		<version>0.0.4-SNAPSHOT</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.vaadin.addon</groupId>
@@ -98,13 +98,17 @@
 				<artifactId>gwt-maven-plugin</artifactId>
 				<version>${gwt.plugin.version}</version>
 				<configuration>
-					<webappDirectory>${project.build.directory}/${project.build.finalName}/VAADIN/widgetsets</webappDirectory>
-					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
 					<runTarget>grid</runTarget>
-					<hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
-					<noServer>true</noServer>
-					<port>8080</port>
 					<compileReport>true</compileReport>
+					<webappDirectory>${project.build.directory}/testwebapp/VAADIN/widgetsets</webappDirectory>
+					<extraJvmArgs>-Xmx1024M -Xss1024k</extraJvmArgs>
+					<hostedWebapp>${project.build.directory}/testwebapp</hostedWebapp>
+					<noServer>true</noServer>
+					<module>org.vaadin.addon.grid.demo.widgetset.GridDemoWidgetset</module>
+					<runTarget>http://localhost:9998/</runTarget>
+					<draftCompile>true</draftCompile>
+					<style>PRETTY</style>
+					
 				</configuration>
 				<executions>
 					<execution>
@@ -143,6 +147,12 @@
 				</executions>
 			</plugin>
 		</plugins>
+		
+		<resources>
+			<resource><directory>src/main/java</directory></resource>
+			<resource><directory>src/test/java</directory></resource> 
+		</resources>
+		
 	</build>
 
 	<dependencies>
@@ -155,10 +165,43 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
-			<version>2.3.0</version>
+			<version>${gwt.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+			<classifier>sources</classifier>
+		<scope>provided</scope>
+	</dependency> 
+	
+	<dependency>
+		<groupId>org.eclipse.jetty</groupId>
+		<artifactId>jetty-servlet</artifactId>
+		<version>7.2.2.v20101205</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.jetty</groupId>
+		<artifactId>jetty-webapp</artifactId>
+		<version>7.2.2.v20101205</version>
+		<scope>test</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>org.eclipse.jetty</groupId>
+		<artifactId>jetty-servlets</artifactId>
+		<version>7.2.2.v20101205</version>
+		<scope>test</scope>
+	</dependency>
 	</dependencies>
 
 </project>
