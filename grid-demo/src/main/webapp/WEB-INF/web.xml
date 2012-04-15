@@ -12,7 +12,7 @@
         <init-param>
             <description>Vaadin application class to start</description>
             <param-name>application</param-name>
-            <param-value>org.vaadin.addon.grid.demo.AddonDemoApplication</param-value>
+            <param-value>org.vaadin.addon.grid.griddemo.GriddemoApplication</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
