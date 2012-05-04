@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.vaadin.addon.grid.body.GridBody;
-import org.vaadin.addon.grid.client.ui.rowexpansion.VExpandingGridRow;
+import org.vaadin.addon.grid.client.ui.row.VGridRow;
 
 import com.vaadin.data.Item;
 import com.vaadin.data.Item.PropertySetChangeEvent;
@@ -21,7 +21,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.Reindeer;
 
 @SuppressWarnings("serial")
-@ClientWidget(value = VExpandingGridRow.class, loadStyle = LoadStyle.EAGER)
+@ClientWidget(value = VGridRow.class, loadStyle = LoadStyle.EAGER)
 public class GridRow extends AbstractLayout implements Item.Viewer, Item.PropertySetChangeListener {
     
     private Map<Object, Component> propertyComponentMap = new HashMap<Object, Component>();

@@ -27,10 +27,10 @@ import com.vaadin.ui.AbstractLayout;
 import com.vaadin.ui.Component;
 
 @SuppressWarnings({"serial"})
-public class GridBody<T extends AbstractGrid<?>> extends AbstractLayout implements ServerSideHandler, Container.Viewer,
+public class GridBody<T extends AbstractGrid<T>> extends AbstractLayout implements ServerSideHandler, Container.Viewer,
         Container.ItemSetChangeListener, Container.PropertySetChangeListener {
 
-    private T grid;
+    private AbstractGrid<T> grid;
     
     private Container container;
     
@@ -50,11 +50,11 @@ public class GridBody<T extends AbstractGrid<?>> extends AbstractLayout implemen
     
     protected boolean isDebug = false;
     
-    public GridBody(T grid) {
+    public GridBody(AbstractGrid<T> grid) {
         this(new IndexedContainer(), grid);
     }
 
-    public GridBody(Container.Indexed dataSource, T grid) {
+    public GridBody(Container dataSource, AbstractGrid<T> grid) {
         super();
         this.grid = grid;
         this.renderInfo = new RenderInfo();

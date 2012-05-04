@@ -11,6 +11,7 @@ import org.vaadin.addon.grid.GridRow;
 import org.vaadin.addon.grid.LazyLoadingGrid;
 import org.vaadin.addon.grid.client.ui.body.VLazyLoadBodyComposite;
 
+import com.vaadin.data.Container;
 import com.vaadin.data.Container.Indexed;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
@@ -28,7 +29,7 @@ public class LazyLoadingBody extends GridBody<LazyLoadingGrid> {
         super(grid);
     }
 
-    public LazyLoadingBody(Indexed dataSource, LazyLoadingGrid grid) {
+    public LazyLoadingBody(Container dataSource, LazyLoadingGrid grid) {
         super(dataSource, grid);
     }
     

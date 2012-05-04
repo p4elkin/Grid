@@ -20,9 +20,9 @@ import com.vaadin.ui.ClientWidget.LoadStyle;
 
 @SuppressWarnings("serial")
 @ClientWidget(value = VGrid.class, loadStyle=LoadStyle.EAGER)
-public abstract class AbstractGrid<T extends GridBody<?>> extends AbstractSelect implements ServerSideHandler {
+public abstract class AbstractGrid<T extends AbstractGrid<T>> extends AbstractSelect implements ServerSideHandler {
  
-    private T body = createBody();
+    private GridBody<T> body;
     
     private GridHeader header;
     
@@ -30,18 +30,19 @@ public abstract class AbstractGrid<T extends GridBody<?>> extends AbstractSelect
     
     private final ColumnModel columnModel;
     
+    protected abstract T get();
+    
     public AbstractGrid() {
         this(new IndexedContainer());
     }
     
     public AbstractGrid(final Container container) {
-        super();
         this.columnModel = new ColumnModel();
         setContainerDataSource(container);
         setImmediate(true);
         initializeProxy();
         createHeader();
-        createBody();
+        this.body = createBody(container);
         setVisibleColumns(container.getContainerPropertyIds().toArray());
     }
     
@@ -116,6 +117,8 @@ public abstract class AbstractGrid<T extends GridBody<?>> extends AbstractSelect
         super.attach();
         body.attach();
         header.attach();
+        body.setParent(this);
+        header.setParent(this);
     }
     
     @Override
@@ -141,11 +144,9 @@ public abstract class AbstractGrid<T extends GridBody<?>> extends AbstractSelect
     
     protected void createHeader() {
         this.header = new GridHeader(this);
-        header.setParent(this);
-        requestRepaint();        
     }
     
-    protected abstract T createBody();
+    protected abstract GridBody<T> createBody(final Container container);
     
     @Override
     public void requestRepaint() {
@@ -180,7 +181,7 @@ public abstract class AbstractGrid<T extends GridBody<?>> extends AbstractSelect
         requestRepaint();
     }
     
-    public T getBody() {
+    public GridBody<T> getBody() {
         return body;
     }
     

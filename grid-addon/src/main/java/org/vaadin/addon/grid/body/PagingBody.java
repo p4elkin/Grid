@@ -7,6 +7,7 @@ import org.vaadin.addon.grid.GridRow;
 import org.vaadin.addon.grid.PagingGrid;
 import org.vaadin.addon.grid.client.ui.body.VPagingBodyComposite;
 
+import com.vaadin.data.Container;
 import com.vaadin.data.Container.Indexed;
 import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.ClientWidget.LoadStyle;
@@ -21,8 +22,11 @@ public class PagingBody extends GridBody<PagingGrid> {
     }
     
 
-    public PagingBody(Indexed dataSource, PagingGrid grid) {
+    public PagingBody(Container dataSource, PagingGrid grid) {
         super(dataSource, grid);
+        if (!(dataSource instanceof Indexed)) {
+            throw new RuntimeException("Wrong container type");
+        }
         setPageLength(20);
     }
     
