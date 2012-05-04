@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.vaadin.addon.grid.body.GridBody;
-import org.vaadin.addon.grid.body.PagingBody;
 import org.vaadin.addon.grid.client.ui.VColumnModel;
 import org.vaadin.addon.grid.client.ui.VGrid;
 import org.vaadin.addon.grid.header.GridHeader;
@@ -21,9 +20,9 @@ import com.vaadin.ui.ClientWidget.LoadStyle;
 
 @SuppressWarnings("serial")
 @ClientWidget(value = VGrid.class, loadStyle=LoadStyle.EAGER)
-public class Grid extends AbstractSelect implements ServerSideHandler {
+public abstract class AbstractGrid<T extends GridBody<?>> extends AbstractSelect implements ServerSideHandler {
  
-    private GridBody body;
+    private T body = createBody();
     
     private GridHeader header;
     
@@ -31,11 +30,11 @@ public class Grid extends AbstractSelect implements ServerSideHandler {
     
     private final ColumnModel columnModel;
     
-    public Grid() {
+    public AbstractGrid() {
         this(new IndexedContainer());
     }
     
-    public Grid(final Indexed container) {
+    public AbstractGrid(final Container container) {
         super();
         this.columnModel = new ColumnModel();
         setContainerDataSource(container);
@@ -146,11 +145,7 @@ public class Grid extends AbstractSelect implements ServerSideHandler {
         requestRepaint();        
     }
     
-    public void createBody() {
-        this.body = new PagingBody((Indexed)items, this);
-        body.setParent(this);
-        requestRepaint();
-    }
+    protected abstract T createBody();
     
     @Override
     public void requestRepaint() {
@@ -185,7 +180,7 @@ public class Grid extends AbstractSelect implements ServerSideHandler {
         requestRepaint();
     }
     
-    public GridBody getBody() {
+    public T getBody() {
         return body;
     }
     

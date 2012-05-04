@@ -51,6 +51,8 @@ public class VGridRow extends ComplexPanel implements Container, ClickHandler {
     
     private int index = 0;
     
+    private String styleToken = null;
+    
     public VGridRow() {
         super();
         setElement(container);
@@ -75,6 +77,10 @@ public class VGridRow extends ComplexPanel implements Container, ClickHandler {
      
         if (client.updateComponent(this, uidl, false)) {
             return;
+        }
+        
+        if (styleToken == null && uidl.hasAttribute("token")) {
+            styleToken = uidl.getStringAttribute("token");
         }
         
         if (!Util.isCached(uidl)) {
@@ -140,7 +146,7 @@ public class VGridRow extends ComplexPanel implements Container, ClickHandler {
     }
     
     private VGridCell createNewCell(final String columnKey) {
-        final VGridCell cell = new VGridCell(columnKey, this);
+        final VGridCell cell = new VGridCell(columnKey, this, styleToken);
         columnKeysToCell.put(columnKey, cell);
         add(cell);
         return cell;

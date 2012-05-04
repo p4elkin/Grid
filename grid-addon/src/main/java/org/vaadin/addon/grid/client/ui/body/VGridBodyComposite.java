@@ -56,6 +56,12 @@ public abstract class VGridBodyComposite<T extends VAbstractGridBody> extends Co
         super.onLoad();
         style = new ComputedStyle(body.getElement());
     }
+    
+    @Override
+    protected void onUnload() {
+        super.onUnload();
+        columnModel.destroyAndClearRules();
+    }
 
     @Override
     public boolean initWidget(Object[] params) {
@@ -138,10 +144,6 @@ public abstract class VGridBodyComposite<T extends VAbstractGridBody> extends Co
     
     public final ApplicationConnection getAppConnection() {
         return client;
-    }
-
-    public final VColumnModel getColumnInfo() {
-        return columnModel;
     }
 
     protected EventBus getEventBus() {

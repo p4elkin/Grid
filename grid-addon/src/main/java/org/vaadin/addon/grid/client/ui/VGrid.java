@@ -61,8 +61,8 @@ public class VGrid extends FlowPanel implements Paintable, ClientSideHandler, Co
                     insert((VGridHeader)newHeaderPaintable, 0);
                 }
                 if (body != null) {
-                    this.header.setColumnInfo(body.getColumnInfo());
-                    body.getColumnInfo().setHeader(header);
+                    this.header.setColumnInfo(body.getColumnModel());
+                    body.getColumnModel().setHeader(header);
                 }
                 newHeaderPaintable.updateFromUIDL(headerUidl.getChildUIDL(0), client);
             }

@@ -7,24 +7,28 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.vaadin.addon.grid.Grid;
 import org.vaadin.addon.grid.GridRow;
+import org.vaadin.addon.grid.LazyLoadingGrid;
+import org.vaadin.addon.grid.client.ui.body.VLazyLoadBodyComposite;
 
 import com.vaadin.data.Container.Indexed;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
+import com.vaadin.ui.ClientWidget;
+import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 
 @SuppressWarnings("serial")
-public class LazyLoadingBody extends GridBody {
+@ClientWidget(value = VLazyLoadBodyComposite.class, loadStyle = LoadStyle.EAGER)
+public class LazyLoadingBody extends GridBody<LazyLoadingGrid> {
     
     private float cacheRate = 1f;
     
-    public LazyLoadingBody(Grid grid) {
+    public LazyLoadingBody(LazyLoadingGrid grid) {
         super(grid);
     }
 
-    public LazyLoadingBody(Indexed dataSource, Grid grid) {
+    public LazyLoadingBody(Indexed dataSource, LazyLoadingGrid grid) {
         super(dataSource, grid);
     }
     

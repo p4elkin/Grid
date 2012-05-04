@@ -3,8 +3,8 @@ package org.vaadin.addon.grid.body;
 import java.util.Arrays;
 import java.util.List;
 
-import org.vaadin.addon.grid.Grid;
 import org.vaadin.addon.grid.GridRow;
+import org.vaadin.addon.grid.PagingGrid;
 import org.vaadin.addon.grid.client.ui.body.VPagingBodyComposite;
 
 import com.vaadin.data.Container.Indexed;
@@ -13,15 +13,15 @@ import com.vaadin.ui.ClientWidget.LoadStyle;
 
 @SuppressWarnings("serial")
 @ClientWidget(value = VPagingBodyComposite.class, loadStyle = LoadStyle.EAGER)
-public class PagingBody extends GridBody {
+public class PagingBody extends GridBody<PagingGrid> {
 
-    public PagingBody(Grid grid) {
+    public PagingBody(PagingGrid grid) {
         super(grid);
         setPageLength(20);
     }
     
 
-    public PagingBody(Indexed dataSource, Grid grid) {
+    public PagingBody(Indexed dataSource, PagingGrid grid) {
         super(dataSource, grid);
         setPageLength(20);
     }

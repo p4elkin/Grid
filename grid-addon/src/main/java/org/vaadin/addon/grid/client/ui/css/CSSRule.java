@@ -157,4 +157,8 @@ public class CSSRule {
     }
     }-*/;
 
+    public native void destroy() /*-{
+        
+    }-*/;
+
 }

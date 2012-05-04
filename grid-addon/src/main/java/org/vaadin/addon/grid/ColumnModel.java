@@ -28,8 +28,11 @@ public class ColumnModel implements Serializable {
     
     private int defaultColummnWidth = GridConst.DEFAULT_COL_WIDTH;
     
+    private final String token;
+   
     public ColumnModel() {
         super();
+        token = "test";
     }
 
     public void setVisibleColumns(final Collection<?> ids) {
@@ -104,4 +107,9 @@ public class ColumnModel implements Serializable {
     public String getKey(Object columnId) {
         return mapper.key(columnId);
     }
+
+    public String getStyleToken() {
+        return token;
+    }
+
 }

@@ -7,12 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.vaadin.addon.grid.AbstractGrid;
 import org.vaadin.addon.grid.ColumnModel;
-import org.vaadin.addon.grid.Grid;
 import org.vaadin.addon.grid.GridRow;
 import org.vaadin.addon.grid.client.ui.RenderInfo;
 import org.vaadin.addon.grid.client.ui.VColumnModel.Align;
-import org.vaadin.addon.grid.client.ui.body.VLazyLoadBodyComposite;
 import org.vaadin.addon.grid.rpc.ServerSideHandler;
 
 import com.vaadin.data.Container;
@@ -25,18 +24,15 @@ import com.vaadin.data.util.IndexedContainer;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.AbstractLayout;
-import com.vaadin.ui.ClientWidget;
-import com.vaadin.ui.ClientWidget.LoadStyle;
 import com.vaadin.ui.Component;
 
 @SuppressWarnings({"serial"})
-@ClientWidget(value = VLazyLoadBodyComposite.class, loadStyle = LoadStyle.EAGER)
-public class GridBody extends AbstractLayout implements ServerSideHandler, Container.Viewer,
+public class GridBody<T extends AbstractGrid<?>> extends AbstractLayout implements ServerSideHandler, Container.Viewer,
         Container.ItemSetChangeListener, Container.PropertySetChangeListener {
 
-    private Grid grid;
+    private T grid;
     
-    private Indexed container;
+    private Container container;
     
     private GridBodyProxy proxy;
 
@@ -54,11 +50,11 @@ public class GridBody extends AbstractLayout implements ServerSideHandler, Conta
     
     protected boolean isDebug = false;
     
-    public GridBody(Grid grid) {
+    public GridBody(T grid) {
         this(new IndexedContainer(), grid);
     }
 
-    public GridBody(Container.Indexed dataSource, Grid grid) {
+    public GridBody(Container.Indexed dataSource, T grid) {
         super();
         this.grid = grid;
         this.renderInfo = new RenderInfo();
@@ -131,6 +127,7 @@ public class GridBody extends AbstractLayout implements ServerSideHandler, Conta
         proxy.callOnce("setVisibleColumns", info.getVisibleColumnsKeys().toArray());
         proxy.callOnce("setCollapsedColumns", info.getCollapsedColumnsKeys().toArray());
         proxy.callOnce("setColumnWidths", info.getColumnWidths());
+        proxy.callOnce("setStyleToken", info.getStyleToken());
         return new Object[] { 
                 pageLength, 
                 totalRows,};
@@ -172,7 +169,7 @@ public class GridBody extends AbstractLayout implements ServerSideHandler, Conta
         for (int i = 0; i < number; ++i) {
             final GridRow row = addNewRow(inHead);
             int index = inHead ? offset - i - 1 : offset + i;
-            final Item item = container.getItem(container.getIdByIndex(index));
+            final Item item = container.getItem(((Indexed)container).getIdByIndex(index));
             row.setIndex(index);
             row.setItemDataSource(item);
         }
@@ -236,12 +233,13 @@ public class GridBody extends AbstractLayout implements ServerSideHandler, Conta
         renderInfo.setBounds(0, renderedRowsAmount - 1);
         
         int idx = 0;
-        Object id = container.getIdByIndex(0);
+        final Indexed indexed = (Indexed)container;
+        Object id = indexed.getIdByIndex(0);
         for (;idx < renderedRowsAmount; ++idx) {
             final GridRow row = (GridRow)rows.get(idx);
             row.setItemDataSource(container.getItem(id));
             row.setIndex(idx);
-            id = container.nextItemId(id);
+            id = indexed.nextItemId(id);
         }
         
         proxy.call("setTotalRows", totalRows);

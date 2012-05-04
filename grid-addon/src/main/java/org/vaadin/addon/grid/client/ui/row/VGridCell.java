@@ -25,14 +25,14 @@ public class VGridCell extends SimpleFocusablePanel {
     
     private VGridRow parentRow;
     
-    public VGridCell(final String columnKey, final VGridRow row) {
+    public VGridCell(final String columnKey, final VGridRow row, String styleToken) {
         super();
         this.parentRow = row;
         this.container = getElement();
         this.columnKey = columnKey;
         container.addClassName(STYLE_NAME);
         wrapper.addClassName(CONTENT_STYLE_NAME);
-        container.addClassName("v-td-" + columnKey);
+        container.addClassName("v-td-" + styleToken + columnKey);
         container.appendChild(wrapper);
         DOM.sinkEvents(getElement(), DOM.getEventsSunk(getElement()) | Event.FOCUSEVENTS);
     }

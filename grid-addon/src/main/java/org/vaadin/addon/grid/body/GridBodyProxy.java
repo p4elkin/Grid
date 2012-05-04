@@ -6,9 +6,9 @@ import org.vaadin.addon.grid.rpc.ServerSideProxy;
 @SuppressWarnings("serial")
 public class GridBodyProxy extends ServerSideProxy {
 
-    private final GridBody body;
+    private final GridBody<?> body;
 
-    public GridBodyProxy(final GridBody body) {
+    public GridBodyProxy(final GridBody<?> body) {
         super(body);
         this.body = body;
     }

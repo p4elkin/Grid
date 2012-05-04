@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.vaadin.addon.grid.ColumnModel;
-import org.vaadin.addon.grid.Grid;
+import org.vaadin.addon.grid.AbstractGrid;
 import org.vaadin.addon.grid.client.ui.header.VGridHeader;
 
 import com.vaadin.terminal.PaintException;
@@ -22,11 +22,11 @@ public class GridHeader extends AbstractLayout {
 
     private final Map<String, Component> headerComponents = new HashMap<String, Component>();
     
-    private final Grid grid;
+    private final AbstractGrid grid;
     
     private HeaderComponentFactory factory = new HeaderComponentFactory.Default();
     
-    public GridHeader(Grid grid) {
+    public GridHeader(AbstractGrid grid) {
         super();
         this.grid = grid;
         setImmediate(true);

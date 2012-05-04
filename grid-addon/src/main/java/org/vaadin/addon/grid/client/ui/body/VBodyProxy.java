@@ -131,6 +131,14 @@ public class VBodyProxy extends ClientSideProxy {
                 composite.getBody().setCellEditable((Boolean)params[0]);
             }
         });
+        
+        register("setStyleToken", new Method() {            
+            @Override
+            public void invoke(String methodName, Object[] params) {
+                assert params.length == 1;
+                composite.getColumnModel().setToken(String.valueOf(params[0]));
+            }
+        });
     }
     
     public void processRowRequest(Object[] indeces) {

@@ -15,6 +15,8 @@ import org.vaadin.addon.grid.client.ui.header.VGridHeader;
 
 public class VColumnModel {
 
+    private String token;
+    
     public static enum Align {
         LEFT("left"),
         RIGHT("right"),
@@ -117,7 +119,7 @@ public class VColumnModel {
         if (ComputedStyle.parseInt(rule.getProperty("paddingRight")) != null) {
             result += ComputedStyle.parseInt(rule.getProperty("paddingRight"));
         }
-        return 0;
+        return result;
     }
 
     public void setDefaultColumnWidth(int width) {
@@ -214,15 +216,29 @@ public class VColumnModel {
     }
     
     private CSSRule getCssRule(String key) {
-        CSSRule result = columnWidthStyleMap.get(key);
+        final String finalKey = token + key;
+        CSSRule result = columnWidthStyleMap.get(finalKey);
         if (result == null) {
-            result = CSSRule.create(".v-td-" + key);
+            result = CSSRule.create(".v-td-" + finalKey);
             result.setProperty("width", "100px");
-            columnWidthStyleMap.put(key, result);
+            columnWidthStyleMap.put(finalKey, result);
         }
         return result;
     }
 
+    public void destroyAndClearRules() {
+        final Iterator<Map.Entry<String, CSSRule>> it = columnWidthStyleMap.entrySet().iterator();
+        while (it.hasNext()) {
+            final Entry<String, CSSRule> entry = it.next();
+            entry.getValue().destroy();
+            it.remove();
+        }
+    }
+
+    public String getToken() {
+        return token;
+    }
+    
     public String getColumnControlStyleName(String key) {
         return "v-td-" + key;
     }
@@ -233,5 +249,9 @@ public class VColumnModel {
 
     public VGridHeader getHeader() {
         return header;
+    }
+
+    public void setToken(String token) {
+        this.token = token; 
     }
 }

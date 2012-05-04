@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.vaadin.addon.grid.body.GridBody;
-import org.vaadin.addon.grid.client.ui.row.VGridRow;
 import org.vaadin.addon.grid.client.ui.rowexpansion.VExpandingGridRow;
 
 import com.vaadin.data.Item;
@@ -57,7 +56,7 @@ public class GridRow extends AbstractLayout implements Item.Viewer, Item.Propert
     @Override
     public void paintContent(PaintTarget target) throws PaintException {
         super.paintContent(target);
-        target.addAttribute("odd", isOdd);
+        target.addAttribute("token", columnInfo.getStyleToken());
         paintCells(target);   
     }
     
@@ -177,9 +176,9 @@ public class GridRow extends AbstractLayout implements Item.Viewer, Item.Propert
     }
     
     @Override
-    public GridBody getParent() {
+    public GridBody<?> getParent() {
         final Component parent = super.getParent();
-        return parent == null ? null : (GridBody)super.getParent();
+        return parent == null ? null : (GridBody<?>)super.getParent();
     }
     
     @Override

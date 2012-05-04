@@ -1,6 +1,7 @@
 package org.vaadin.addon.grid.demo;
 
-import org.vaadin.addon.grid.Grid;
+import org.vaadin.addon.grid.AbstractGrid;
+import org.vaadin.addon.grid.PagingGrid;
 import org.vaadin.addon.grid.client.ui.VColumnModel.Align;
 import org.vaadin.addon.grid.header.HeaderComponentFactory;
 
@@ -35,7 +36,7 @@ public class GriddemoApplication extends Application {
         table.setCacheRate(0.5d);
 
         table.setNullSelectionAllowed(false);
-        final Grid grid = new Grid(c);
+        final PagingGrid grid = new PagingGrid(c);
         grid.setWidth("100%");
         grid.setHeight("100%");
 
@@ -47,7 +48,7 @@ public class GriddemoApplication extends Application {
         grid.setColumnAlignment("p2", Align.CENTER);
         grid.getHeader().setHeaderFactory(new HeaderComponentFactory() {
             @Override
-            public Component createComponent(final Grid grid, final Object propertyId) {
+            public Component createComponent(final AbstractGrid<?> grid, final Object propertyId) {
                 final TextField l = new TextField("<b>" + propertyId + "<\b>");
                 l.setImmediate(true);
                 l.setWidth("100%");
@@ -76,7 +77,7 @@ public class GriddemoApplication extends Application {
         table.setEditable(true);
         //mainWindow.addComponent(table);
         setMainWindow(mainWindow);
-        //setTheme("griddemotheme");
+        setTheme("testtheme");
     }
 
     public static Indexed getTestContainer() {
